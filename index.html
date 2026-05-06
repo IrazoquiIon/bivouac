@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bivouac Pyrénées & Pays Basque</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1a3d2b;
+    --moss: #2d6a4f;
+    --sage: #52b788;
+    --mist: #b7e4c7;
+    --cream: #faf7f0;
+    --sand: #e9c46a;
+    --rust: #c96a1e;
+    --slate: #2c3e50;
+    --snow: #ffffff;
+    --ink: #1a1a1a;
+    --rock: #6b7280;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--forest);
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 100%, #2d6a4f44 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 20%, #52b78820 0%, transparent 60%),
+      linear-gradient(160deg, #0d2818 0%, #1a3d2b 40%, #1e4d35 100%);
+  }
+
+  /* Mountain SVG silhouette */
+  .hero-mountains {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 55%;
+    pointer-events: none;
+  }
+
+  .hero-stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 10% 15%, rgba(255,255,255,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 8%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 40% 20%, rgba(255,255,255,0.9) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 5%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(2px 2px at 70% 12%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 18%, rgba(255,255,255,0.8) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 15% 30%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 8%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 35% 35%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 78% 30%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(2px 2px at 5% 22%, rgba(255,255,255,0.4) 0%, transparent 100%);
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle { from { opacity: .6 } to { opacity: 1 } }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 1.5rem;
+    animation: fadeUp 1.2s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: .7rem;
+    letter-spacing: .25em;
+    color: var(--sage);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    animation: fadeUp 1.2s .2s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 900;
+    line-height: .95;
+    color: var(--snow);
+    text-shadow: 0 4px 40px rgba(0,0,0,.5);
+    animation: fadeUp 1.2s .3s ease both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--sage);
+    display: block;
+  }
+
+  .hero-sub {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,.65);
+    letter-spacing: .04em;
+    animation: fadeUp 1.2s .5s ease both;
+  }
+
+  .hero-tags {
+    display: flex;
+    gap: .6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    animation: fadeUp 1.2s .7s ease both;
+  }
+
+  .tag {
+    padding: .35rem .9rem;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 2rem;
+    font-size: .75rem;
+    color: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.07);
+    backdrop-filter: blur(4px);
+    letter-spacing: .05em;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    color: rgba(255,255,255,.4);
+    font-family: 'Space Mono', monospace;
+    font-size: .6rem;
+    letter-spacing: .15em;
+    animation: bounce 2s ease-in-out infinite;
+    cursor: pointer;
+    z-index: 10;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,.4));
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(26, 61, 43, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(82, 183, 136, .2);
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .9rem 2rem;
+    gap: 1rem;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--snow);
+    white-space: nowrap;
+  }
+  .nav-logo span { color: var(--sage); }
+
+  .nav-links {
+    display: flex;
+    gap: .3rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,.6);
+    text-decoration: none;
+    font-size: .75rem;
+    padding: .4rem .7rem;
+    border-radius: .3rem;
+    transition: all .2s;
+    white-space: nowrap;
+    letter-spacing: .03em;
+  }
+  .nav-links a:hover { color: var(--sage); background: rgba(82,183,136,.1); }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 1.5rem; }
+
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: .65rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: .8rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--forest);
+    margin-bottom: 1rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--moss); }
+
+  .section-desc {
+    font-size: 1rem;
+    color: var(--rock);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  /* ── FILTERS ── */
+  .filters-wrap {
+    display: flex;
+    gap: .6rem;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .filter-btn {
+    padding: .5rem 1.2rem;
+    border-radius: 2rem;
+    border: 1.5px solid #d1d5db;
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .8rem;
+    color: var(--rock);
+    cursor: pointer;
+    transition: all .2s;
+    letter-spacing: .03em;
+  }
+  .filter-btn:hover { border-color: var(--sage); color: var(--moss); }
+  .filter-btn.active {
+    background: var(--forest);
+    border-color: var(--forest);
+    color: white;
+  }
+
+  /* ── CIRCUIT CARDS GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+  }
+
+  .card {
+    background: white;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0,0,0,.06);
+    transition: transform .3s ease, box-shadow .3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,.13); }
+
+  .card-img {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .card-img-inner {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform .5s ease;
+  }
+  .card:hover .card-img-inner { transform: scale(1.06); }
+
+  .card-level {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: .3rem .75rem;
+    border-radius: 2rem;
+    font-size: .7rem;
+    font-weight: 500;
+    backdrop-filter: blur(8px);
+    letter-spacing: .05em;
+  }
+  .level-facile { background: rgba(82,183,136,.85); color: white; }
+  .level-modere { background: rgba(233,196,106,.9); color: #5a3e00; }
+  .level-difficile { background: rgba(201,106,30,.9); color: white; }
+
+  .card-region {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: .6rem;
+    letter-spacing: .1em;
+    color: rgba(255,255,255,.9);
+    background: rgba(0,0,0,.4);
+    backdrop-filter: blur(4px);
+    padding: .25rem .6rem;
+    border-radius: .3rem;
+  }
+
+  .card-body {
+    padding: 1.4rem 1.4rem 1.6rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-emoji { font-size: 1.4rem; margin-bottom: .5rem; }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--forest);
+    margin-bottom: .5rem;
+    line-height: 1.3;
+  }
+
+  .card-stats {
+    display: flex;
+    gap: .7rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .stat-val {
+    font-family: 'Space Mono', monospace;
+    font-size: .85rem;
+    font-weight: 700;
+    color: var(--forest);
+  }
+  .stat-key {
+    font-size: .65rem;
+    color: var(--rock);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+
+  .card-open-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    margin-top: 1.1rem;
+    font-size: .8rem;
+    font-weight: 500;
+    color: var(--moss);
+    text-decoration: none;
+    letter-spacing: .04em;
+  }
+  .card-open-btn svg { transition: transform .2s; }
+  .card-open-btn:hover svg { transform: translateX(4px); }
+
+  /* ── MODAL / DETAIL OVERLAY ── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    z-index: 200;
+    background: rgba(10,20,14,.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: var(--cream);
+    border-radius: 1.5rem;
+    max-width: 820px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 30px 100px rgba(0,0,0,.35);
+    transform: translateY(30px);
+    transition: transform .35s cubic-bezier(.16,1,.3,1);
+    position: relative;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+
+  .modal-hero {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+  }
+  .modal-hero-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+  .modal-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(10,20,14,.85) 100%);
+  }
+  .modal-hero-content {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 2rem;
+    right: 2rem;
+  }
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+  }
+  .modal-sub {
+    color: rgba(255,255,255,.65);
+    font-size: .85rem;
+    margin-top: .3rem;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    background: rgba(0,0,0,.4);
+    backdrop-filter: blur(4px);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s;
+    z-index: 5;
+  }
+  .modal-close:hover { background: rgba(0,0,0,.7); }
+
+  .modal-body {
+    padding: 2rem;
+  }
+
+  .modal-stats-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .modal-stat {
+    flex: 1;
+    min-width: 100px;
+    background: white;
+    border-radius: .8rem;
+    padding: .9rem 1rem;
+    text-align: center;
+    border: 1px solid #eee;
+  }
+  .modal-stat-icon { font-size: 1.3rem; }
+  .modal-stat-val {
+    font-family: 'Space Mono', monospace;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--forest);
+    display: block;
+    margin-top: .2rem;
+  }
+  .modal-stat-key {
+    font-size: .62rem;
+    color: var(--rock);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .modal-section {
+    margin-bottom: 1.8rem;
+  }
+  .modal-section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: .65rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: .4rem .8rem;
+    font-size: .85rem;
+  }
+  .info-label {
+    font-weight: 500;
+    color: var(--rock);
+    white-space: nowrap;
+  }
+  .info-val { color: var(--ink); }
+
+  /* Etapes table */
+  .etapes-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .8rem;
+  }
+  .etapes-table th {
+    background: var(--forest);
+    color: white;
+    padding: .6rem .8rem;
+    text-align: left;
+    font-family: 'Space Mono', monospace;
+    font-size: .6rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .etapes-table th:first-child { border-radius: .4rem 0 0 0; }
+  .etapes-table th:last-child { border-radius: 0 .4rem 0 0; }
+  .etapes-table td {
+    padding: .7rem .8rem;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .etapes-table tr:nth-child(even) td { background: #f8faf9; }
+  .etapes-table .jour {
+    font-family: 'Space Mono', monospace;
+    font-size: .7rem;
+    font-weight: 700;
+    color: var(--moss);
+    white-space: nowrap;
+  }
+  .etapes-table .dist {
+    font-family: 'Space Mono', monospace;
+    font-size: .75rem;
+    color: var(--forest);
+    white-space: nowrap;
+    font-weight: 700;
+  }
+  .etapes-table .deni {
+    font-size: .72rem;
+    color: var(--rock);
+    white-space: nowrap;
+  }
+  .bivouac-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--sage);
+    border-radius: 50%;
+    margin-right: .4rem;
+    vertical-align: middle;
+  }
+
+  /* Tips list */
+  .tips-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .tips-list li {
+    padding: .6rem .9rem;
+    background: white;
+    border-radius: .5rem;
+    border-left: 3px solid var(--sage);
+    font-size: .83rem;
+    line-height: 1.55;
+    color: var(--slate);
+  }
+
+  /* Links */
+  .links-list {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+  .ext-link {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    padding: .7rem .9rem;
+    background: white;
+    border-radius: .5rem;
+    border: 1px solid #e5e7eb;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: .82rem;
+    transition: all .2s;
+  }
+  .ext-link:hover { border-color: var(--sage); background: #f0faf4; }
+  .ext-link-icon { font-size: 1rem; flex-shrink: 0; }
+  .ext-link-label { font-weight: 500; color: var(--forest); }
+  .ext-link-note { color: var(--rock); font-size: .75rem; margin-top: .1rem; }
+  .ext-link-arrow { margin-left: auto; color: var(--rock); }
+
+  /* ── MATERIEL SECTION ── */
+  .materiel-bg {
+    background: var(--forest);
+  }
+
+  .materiel-bg .section-label { color: var(--sage); }
+  .materiel-bg .section-title { color: white; }
+  .materiel-bg .section-title em { color: var(--sage); }
+  .materiel-bg .section-desc { color: rgba(255,255,255,.55); }
+
+  .materiel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin-top: 3rem;
+  }
+
+  .materiel-card {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 1rem;
+    padding: 1.4rem;
+    transition: background .2s;
+  }
+  .materiel-card:hover { background: rgba(255,255,255,.11); }
+
+  .materiel-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: .8rem;
+  }
+  .materiel-icon { font-size: 1.6rem; }
+  .prio-badge {
+    font-size: .65rem;
+    padding: .25rem .6rem;
+    border-radius: 2rem;
+    font-weight: 500;
+    letter-spacing: .05em;
+  }
+  .prio-rouge { background: rgba(220,38,38,.25); color: #fca5a5; border: 1px solid rgba(220,38,38,.3); }
+  .prio-orange { background: rgba(234,88,12,.2); color: #fdba74; border: 1px solid rgba(234,88,12,.25); }
+  .prio-jaune { background: rgba(234,179,8,.15); color: #fde047; border: 1px solid rgba(234,179,8,.2); }
+
+  .materiel-name {
+    font-size: .9rem;
+    font-weight: 500;
+    color: white;
+    margin-bottom: .3rem;
+    line-height: 1.35;
+  }
+  .materiel-prix {
+    font-family: 'Space Mono', monospace;
+    font-size: .72rem;
+    color: var(--sage);
+  }
+  .materiel-ou {
+    font-size: .72rem;
+    color: rgba(255,255,255,.4);
+    margin-top: .2rem;
+  }
+
+  /* ── REGLES BIVOUAC ── */
+  .regles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .regle-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    border-top: 3px solid var(--sage);
+  }
+  .regle-icon { font-size: 1.8rem; margin-bottom: .8rem; }
+  .regle-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--forest);
+    margin-bottom: .5rem;
+  }
+  .regle-text {
+    font-size: .82rem;
+    color: var(--rock);
+    line-height: 1.6;
+  }
+
+  /* ── URGENCES BANNER ── */
+  .urgences {
+    background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+    padding: 3rem 1.5rem;
+  }
+  .urgences-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+  .urgences-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: .5rem;
+  }
+  .urgences-sub {
+    color: rgba(255,255,255,.65);
+    font-size: .85rem;
+  }
+  .urgences-nums {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .urg-num {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    background: rgba(255,255,255,.1);
+    border-radius: .6rem;
+    padding: .7rem 1.2rem;
+  }
+  .urg-label { color: rgba(255,255,255,.6); font-size: .75rem; }
+  .urg-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0d1f14;
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: .5rem;
+  }
+  .footer-logo span { color: var(--sage); }
+  .footer-sub {
+    font-size: .8rem;
+    color: rgba(255,255,255,.35);
+    letter-spacing: .06em;
+  }
+
+  /* ── UTILS ── */
+  .hidden { display: none !important; }
+
+  @media (max-width: 640px) {
+    .urgences-inner { grid-template-columns: 1fr; }
+    .modal-stats-row { gap: .6rem; }
+    .modal-stat { min-width: 80px; padding: .7rem .6rem; }
+    .etapes-table { font-size: .72rem; }
+    .etapes-table td { padding: .5rem .5rem; }
+    section { padding: 3.5rem 1rem; }
+    .modal-body { padding: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-stars"></div>
+
+  <!-- Mountain silhouette SVG -->
+  <svg class="hero-mountains" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,320 L0,200 L60,180 L120,195 L180,160 L240,175 L300,140 L360,155 L420,120 L480,140 L540,100 L600,125 L660,85 L720,110 L780,70 L840,95 L900,55 L960,80 L1020,45 L1080,70 L1140,90 L1200,65 L1260,100 L1320,80 L1380,110 L1440,90 L1440,320 Z" fill="rgba(10,25,16,0.7)"/>
+    <path d="M0,320 L0,240 L80,220 L160,235 L240,200 L320,215 L400,180 L480,195 L560,160 L640,180 L720,145 L800,165 L880,130 L960,150 L1040,170 L1120,145 L1200,165 L1280,140 L1360,160 L1440,145 L1440,320 Z" fill="rgba(13,30,20,0.85)"/>
+    <path d="M0,320 L0,270 L120,250 L240,265 L360,245 L480,260 L600,240 L720,255 L840,238 L960,252 L1080,242 L1200,258 L1320,245 L1440,260 L1440,320 Z" fill="rgba(15,35,22,0.95)"/>
+    <path d="M0,320 L0,290 L1440,285 L1440,320 Z" fill="#0d1f14"/>
+  </svg>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Pyrénées & Pays Basque</p>
+    <h1 class="hero-title">
+      Randonnées<br>
+      <em>Bivouac</em>
+    </h1>
+    <p class="hero-sub">9 circuits en boucle · Débutants à confirmés · Départ = Arrivée</p>
+    <div class="hero-tags">
+      <span class="tag">🏔️ Pyrénées centrales</span>
+      <span class="tag">🌿 Pays Basque</span>
+      <span class="tag">🌊 Pyrénées orientales</span>
+      <span class="tag">⛺ Bivouac</span>
+      <span class="tag">🔁 Circuits en boucle</span>
+    </div>
+  </div>
+
+  <div class="hero-scroll" onclick="document.getElementById('circuits').scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-line"></div>
+    <span>DÉFILER</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Bivouac <span>Pyrénées</span></div>
+    <div class="nav-links">
+      <a href="#circuits">Circuits</a>
+      <a href="#materiel">Matériel</a>
+      <a href="#regles">Réglementation</a>
+      <a href="#urgences">Urgences</a>
+    </div>
+  </div>
+</nav>
+
+<!-- CIRCUITS -->
+<section id="circuits">
+  <div class="container">
+    <p class="section-label">Les itinéraires</p>
+    <h2 class="section-title">9 circuits <em>en boucle</em></h2>
+    <p class="section-desc">Des sentiers des crêtes basques aux lacs d'altitude pyrénéens. Tous les circuits partent et arrivent au même point.</p>
+
+    <div class="filters-wrap">
+      <button class="filter-btn active" data-filter="all">Tous (9)</button>
+      <button class="filter-btn" data-filter="debutant">🟢 Débutant</button>
+      <button class="filter-btn" data-filter="modere">🟡 Modéré</button>
+      <button class="filter-btn" data-filter="difficile">🔴 Difficile</button>
+      <button class="filter-btn" data-filter="paysbasque">🌿 Pays Basque</button>
+      <button class="filter-btn" data-filter="pyrenees">🏔️ Pyrénées</button>
+      <button class="filter-btn" data-filter="2jours">2 jours</button>
+      <button class="filter-btn" data-filter="3jours">3 jours</button>
+      <button class="filter-btn" data-filter="4jours+">4+ jours</button>
+    </div>
+
+    <div class="cards-grid" id="cardsGrid"></div>
+  </div>
+</section>
+
+<!-- MATERIEL -->
+<section id="materiel" class="materiel-bg">
+  <div class="container">
+    <p class="section-label" style="color:var(--sage)">Équipement</p>
+    <h2 class="section-title" style="color:white">Ce qu'il faut <em>emporter</em></h2>
+    <p class="section-desc" style="color:rgba(255,255,255,.55)">Liste complète pour un premier bivouac. Priorité 🔴 = indispensable avant de partir.</p>
+    <div class="materiel-grid" id="materielGrid"></div>
+  </div>
+</section>
+
+<!-- REGLES -->
+<section id="regles" style="background:#f4f7f5">
+  <div class="container">
+    <p class="section-label">À savoir absolument</p>
+    <h2 class="section-title">Règles du <em>bivouac</em></h2>
+    <p class="section-desc">La réglementation en France et dans les Pyrénées. À lire avant de partir.</p>
+    <div class="regles-grid" id="reglesGrid"></div>
+  </div>
+</section>
+
+<!-- URGENCES -->
+<div class="urgences" id="urgences">
+  <div class="urgences-inner">
+    <div>
+      <div class="urgences-title">☎️ Numéros d'urgence</div>
+      <p class="urgences-sub">En cas d'accident, appelez immédiatement. Le 112 fonctionne même sans réseau sur certains opérateurs.</p>
+      <p class="urgences-sub" style="margin-top:.5rem">Règle d'or : si le temps se gâte, <strong style="color:white">demi-tour sans hésiter</strong>. C'est toujours une option.</p>
+    </div>
+    <div class="urgences-nums">
+      <div class="urg-num">
+        <div>
+          <div class="urg-label">Numéro d'urgence universel</div>
+          <div class="urg-val">112</div>
+        </div>
+      </div>
+      <div class="urg-num">
+        <div>
+          <div class="urg-label">PGHM Pau</div>
+          <div class="urg-val">05 62 92 41 41</div>
+        </div>
+      </div>
+      <div class="urg-num">
+        <div>
+          <div class="urg-label">PGHM Tarbes</div>
+          <div class="urg-val">05 62 44 04 44</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Bivouac <span>Pyrénées</span></div>
+  <p class="footer-sub">Le plus beau bivouac, c'est toujours le premier &nbsp;·&nbsp; Laissez la montagne intacte</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <div class="modal-hero">
+      <div class="modal-hero-img" id="modalHeroImg"></div>
+      <div class="modal-hero-overlay"></div>
+      <div class="modal-hero-content">
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-sub" id="modalSub"></div>
+      </div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────
+
+const CIRCUITS = [
+  // ── DÉBUTANTS ──
+  {
+    id: 1,
+    emoji: "🏔️",
+    title: "Tour des Lacs d'Ayous",
+    region: "Vallée d'Ossau (64)",
+    level: "facile",
+    levelLabel: "🟢 Facile+",
+    tags: ["debutant","pyrenees","2jours"],
+    jours: "2 jours",
+    kmJour: "~10 km/j",
+    totalKm: "20 km",
+    denivelé: "1 100 m",
+    img: "https://images.unsplash.com/photo-1609766857823-56b5f81a7d67?w=900&q=80",
+    depart: "Parking lac de Bious-Artigues — Gabas (64440)",
+    acces: "Depuis Pau : 1h15 · Depuis Bayonne : 1h45",
+    sommet: "Col d'Ayous (2 185 m)",
+    balisage: "GR 10 (rouge/blanc) — excellent balisage",
+    eau: "Nombreuses sources et lacs",
+    ravito: "Aucun en chemin · Village de Laruns (25 km)",
+    carte: "IGN Top 25 · 1547 OT — Ossau / Vallée d'Aspe",
+    etapes: [
+      ["J1","Bious-Artigues → Lac d'Ayous → Col d'Ayous → Lac Bersau","10 km","+1 100/−300 m","Rive du lac Bersau (2 083 m) — plat, abrité, vue sur le Midi d'Ossau"],
+      ["J2","Lac Bersau → Lac Roumassot → Lac de Casterau → Bious-Artigues","10 km","+100/−900 m","Retour au point de départ"],
+    ],
+    tips: [
+      "Le lac d'Ayous offre l'un des plus beaux couchers de soleil des Pyrénées, face au Pic du Midi d'Ossau.",
+      "Le J2 est en descente : parfait quand on est un peu fatigués le deuxième jour !",
+      "Balisage GR 10 irréprochable — impossible de se perdre, même sans GPS.",
+      "Zone très fréquentée : rassurante pour un premier bivouac (vous ne serez pas seuls).",
+    ],
+    links: [
+      {icon:"⛺", label:"Refuge d'Ayous (plan B)", url:"https://www.refuge-ayous.com", note:"Gardé, réservez en saison"},
+      {icon:"🗺️", label:"Trace GPS Wikiloc", url:"https://fr.wikiloc.com/itineraires-randonnee-pedestres/tour-des-lacs-d-ayous", note:"Track téléchargeable"},
+      {icon:"📷", label:"Altituderando – fiche détaillée", url:"https://www.altituderando.com/Tour-des-lacs-d-Ayous", note:"Photos + description"},
+      {icon:"🌤️", label:"Météo montagne Pyrénées", url:"https://meteofrance.com/meteo-montagne/pyrenees", note:"À consulter la veille"},
+    ],
+  },
+  {
+    id: 2,
+    emoji: "🌿",
+    title: "Crête d'Iparla – Boucle basque",
+    region: "Pays Basque intérieur (64)",
+    level: "facile",
+    levelLabel: "🟢 Facile+",
+    tags: ["debutant","paysbasque","2jours"],
+    jours: "2 jours",
+    kmJour: "~11 km/j",
+    totalKm: "22 km",
+    denivelé: "1 000 m",
+    img: "https://images.unsplash.com/photo-1499856871958-5b9357976b82?w=900&q=80",
+    depart: "Village de Bidarray (64780) — parking de l'église, gratuit",
+    acces: "Depuis Bayonne : 40 min · Depuis Pau : 1h30",
+    sommet: "Crête d'Iparla (1 044 m)",
+    balisage: "Sentiers balisés jaune-rouge + GR 10",
+    eau: "Sources rares en été — emportez 2L/pers minimum",
+    ravito: "Bidarray : boulangerie, épicerie, restaurants",
+    carte: "IGN Top 25 · 1346 OT — Saint-Jean-Pied-de-Port",
+    etapes: [
+      ["J1","Bidarray → Montée crête d'Iparla → Sommet Artzamendi Nord","11 km","+1 000/−200 m","Crête d'Iparla (900–1 000 m) — pelouses rases, vue 360° sur mer et montagne"],
+      ["J2","Crête → Col de Harrieta → Forêt de Hayra → Bidarray","11 km","+200/−1 000 m","Retour au point de départ"],
+    ],
+    tips: [
+      "Ambiance totalement différente des Pyrénées : pelouses basques, moutons, pottoks et vue sur l'Atlantique.",
+      "La crête d'Iparla est l'une des randonnées les plus emblématiques du Pays Basque.",
+      "Bivouac sur les pelouses de crête : herbe rase, terrain plat naturel, idéal pour planter une tente.",
+      "Le village de Bidarray est charmant — parfait pour un dîner le soir du retour.",
+    ],
+    links: [
+      {icon:"🗺️", label:"Visorando – Crête d'Iparla", url:"https://www.visorando.com/randonnee-crete-d-iparla", note:"Description + profil altimétrique"},
+      {icon:"📍", label:"AllTrails – Iparla Ridge", url:"https://www.alltrails.com/trail/france/pyrenees-atlantiques/iparla-ridge", note:"Carte interactive + avis"},
+      {icon:"🌤️", label:"Météo Bidarray", url:"https://meteofrance.com/previsions-meteo-france/bidarray/64780", note:"Prévisions locales"},
+    ],
+  },
+  {
+    id: 3,
+    emoji: "🌲",
+    title: "Tour de la Forêt d'Iraty",
+    region: "Pays Basque / Pyrénées (64)",
+    level: "facile",
+    levelLabel: "🟢 Facile",
+    tags: ["debutant","paysbasque","3jours"],
+    jours: "3 jours",
+    kmJour: "~10 km/j",
+    totalKm: "30 km",
+    denivelé: "1 200 m",
+    img: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=900&q=80",
+    depart: "Chalet Pedro, Plateau d'Iraty (64560)",
+    acces: "Depuis Bayonne : 1h30 · Depuis Pau : 1h45",
+    sommet: "Col Bagargui (1 327 m)",
+    balisage: "GR 10 + sentiers forestiers jaune — très bien indiqué",
+    eau: "Rivières et fontaines en forêt — eau abondante",
+    ravito: "Chalet Pedro (restaurant, épicerie sommaire)",
+    carte: "IGN Top 25 · 1346 OT — Saint-Jean-Pied-de-Port",
+    etapes: [
+      ["J1","Chalet Pedro → Forêt d'Iraty → Lac Arphia → Col Bagargui","10 km","+600/−200 m","Bords du lac Arphia (1 265 m) — lac en forêt, très protégé"],
+      ["J2","Col Bagargui → Crête des Urculu → Tour d'Urculu → Estive","10 km","+500/−400 m","Estives d'Orgambidexka (1 300 m) — pelouses ouvertes"],
+      ["J3","Orgambidexka → Forêt de Soule → Chalet Pedro","10 km","+100/−700 m","Retour au point de départ"],
+    ],
+    tips: [
+      "La forêt d'Iraty est la plus grande hêtraie-sapinière d'Europe — ambiance forestière magique.",
+      "Les dénivelés sont très doux : idéal si certains membres du groupe sont moins habitués.",
+      "La Tour d'Urculu (J2) est un ancien fortin romain — belle surprise culturelle.",
+      "Accessible en 3 jours tranquilles sans dépasser 1 350 m — aucun risque lié à l'altitude.",
+    ],
+    links: [
+      {icon:"🌲", label:"Site officiel Forêt d'Iraty", url:"https://www.paysbasque-foret-iraty.com", note:"Cartes + infos pratiques"},
+      {icon:"🏠", label:"Chalet Pedro (plan B)", url:"https://www.chaletpedro.com", note:"Restaurant + dortoirs"},
+      {icon:"📷", label:"Altituderando – Iraty", url:"https://www.altituderando.com/La-foret-d-Iraty", note:"Photos de saison"},
+    ],
+  },
+  {
+    id: 4,
+    emoji: "🦅",
+    title: "Boucle Lac d'Artouste & Soussouéou",
+    region: "Vallée d'Ossau (64)",
+    level: "modere",
+    levelLabel: "🟡 Modéré",
+    tags: ["debutant","pyrenees","3jours"],
+    jours: "3 jours",
+    kmJour: "~10 km/j",
+    totalKm: "30 km",
+    denivelé: "1 500 m",
+    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80",
+    depart: "Fabrèges (64440) — parking du téléphérique d'Artouste",
+    acces: "Depuis Pau : 1h20 · Depuis Bayonne : 1h50",
+    sommet: "Lac d'Artouste (1 989 m) + Hourquette d'Arre (2 465 m)",
+    balisage: "GR 10 + sentiers balisés Ossau",
+    eau: "Nombreux lacs et ruisseaux — eau abondante",
+    ravito: "Aucun en chemin (prévoir 3 jours de nourriture)",
+    carte: "IGN Top 25 · 1547 OT — Ossau / Vallée d'Aspe",
+    etapes: [
+      ["J1","Fabrèges → Téléphérique + Train d'Artouste → Lac d'Artouste → Lac d'Arrious","10 km","+400/−200 m","Lac d'Arrious (2 072 m) — vue sur le Midi d'Ossau"],
+      ["J2","Lac d'Arrious → Hourquette d'Arre → Lacs de Soussouéou → Vallée","10 km","+600/−1 100 m","Bords du gave de Soussouéou (1 350 m) — fond de vallée abrité"],
+      ["J3","Soussouéou → Sentier des cascades → Fabrèges","10 km","+400/−650 m","Retour au point de départ"],
+    ],
+    tips: [
+      "Le train d'Artouste est unique : le plus haut train touristique de France (1 950 m). Réservez en avance.",
+      "Les lacs de Soussouéou sont peu fréquentés — spots de bivouac de rêve avec eau courante.",
+      "La Hourquette d'Arre (2 465 m) est le seul passage engagé, mais parfaitement balisé.",
+      "Le retour par les cascades de Soussouéou est spectaculaire et facile.",
+    ],
+    links: [
+      {icon:"🚂", label:"Train d'Artouste (réservation)", url:"https://www.artouste.com", note:"Souvent complet en saison"},
+      {icon:"🗺️", label:"Wikiloc – Soussouéou", url:"https://fr.wikiloc.com/itineraires/lacs-de-soussoueoeu-ossau", note:"Traces GPS du secteur"},
+      {icon:"📷", label:"Altituderando – Lac d'Arrious", url:"https://www.altituderando.com/Lac-d-Arrious", note:"Fiche détaillée + photos"},
+    ],
+  },
+
+  // ── CONFIRMÉS (depuis le 1er doc) ──
+  {
+    id: 5,
+    emoji: "🌿",
+    title: "Tour du Pays Basque intérieur",
+    region: "Pays Basque · France",
+    level: "modere",
+    levelLabel: "⬛ Modéré",
+    tags: ["modere","paysbasque","3jours"],
+    jours: "3 jours",
+    kmJour: "~18 km/j",
+    totalKm: "55 km",
+    denivelé: "2 400 m",
+    img: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=900&q=80",
+    depart: "Saint-Jean-Pied-de-Port (64220) — parking porte Saint-Jacques",
+    acces: "Depuis Bayonne : 55 min · Depuis Pau : 1h20",
+    sommet: "Sommet d'Occabé (1 456 m)",
+    balisage: "GR 10 (rouge/blanc) + sentiers locaux jaune",
+    eau: "Sources en altitude, villages de Banca et Aldudes",
+    ravito: "Villages traversés : Banca, Aldudes",
+    carte: "IGN Top 25 · 1346 OT — Saint-Jean-Pied-de-Port",
+    etapes: [
+      ["J1","Saint-Jean-Pied-de-Port → Col d'Ursuia → Crête d'Iparla","18 km","+1 050/−250 m","Crête d'Iparla (1 044 m)"],
+      ["J2","Crête d'Iparla → Forêt d'Hayra → Sommet d'Occabé","20 km","+950/−700 m","Plateau sous Occabé (1 350 m)"],
+      ["J3","Occabé → Col de Burdincurutcheta → Saint-Jean-Pied-de-Port","17 km","+400/−1 450 m","Retour au point de départ"],
+    ],
+    tips: [
+      "Remplissez vos gourdes au départ : les sources sont parfois taries en été.",
+      "La crête d'Iparla est exposée au vent — prévoyez un abri léger.",
+      "Les estives sont fréquentées par des troupeaux gardés ; restez sur les sentiers.",
+      "Ce circuit peut se raccourcir en 2 jours pour les randonneurs expérimentés.",
+    ],
+    links: [
+      {icon:"🗺️", label:"IGNrando – Pays Basque", url:"https://ignrando.fr/fr/communautes-et-parcours/detail-un-parcours?id=53791", note:"Trace GPS officielle"},
+      {icon:"📷", label:"Visorando – Tour Pays Basque", url:"https://www.visorando.com/randonnee-tour-du-pays-basque/", note:"Description + photos"},
+      {icon:"🌤️", label:"Météo montagne Pyrénées", url:"https://meteofrance.com/meteo-montagne/pyrenees", note:"Prévisions quotidiennes"},
+    ],
+  },
+  {
+    id: 6,
+    emoji: "⛰️",
+    title: "Boucle HRP Ossoue – Vignemale",
+    region: "Pyrénées centrales (65)",
+    level: "difficile",
+    levelLabel: "⬛⬛ Difficile",
+    tags: ["difficile","pyrenees","4jours+"],
+    jours: "4 jours",
+    kmJour: "~17 km/j",
+    totalKm: "68 km",
+    denivelé: "4 200 m",
+    img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80",
+    depart: "Pont d'Espagne, Cauterets (65110) — grand parking payant",
+    acces: "Depuis Tarbes : 1h · Depuis Pau : 1h30",
+    sommet: "Hourquette d'Ossoue (2 734 m)",
+    balisage: "HRP (jaune/rouge) + GR 10",
+    eau: "Nombreux lacs en altitude · Refuge de la Baysellance (gardé)",
+    ravito: "Refuge des Oulettes + Baysellance en route",
+    carte: "IGN Top 25 · 1748 OT — Gavarnie / Luz-Saint-Sauveur",
+    etapes: [
+      ["J1","Pont d'Espagne → Lac de Gaube → Refuge des Oulettes de Gaube","14 km","+1 200/−100 m","Refuge des Oulettes (2 151 m)"],
+      ["J2","Oulettes → Hourquette d'Ossoue → Refuge de Baysellance","12 km","+1 050/−600 m","Refuge Baysellance (2 651 m)"],
+      ["J3","Baysellance → Barrage d'Ossoue → Gavarnie","24 km","+600/−1 900 m","Zone bivouac Gavarnie (1 600 m)"],
+      ["J4","Gavarnie → Col des Tentes (opt.) → Pont d'Espagne via GR 10","18 km","+1 350/−1 600 m","Retour au point de départ"],
+    ],
+    tips: [
+      "Réservez les refuges au minimum 4 semaines à l'avance en juillet-août.",
+      "La Hourquette d'Ossoue peut être enneigée jusqu'en juillet — crampons légers utiles.",
+      "Le bivouac est interdit dans le cœur du Parc National : campez à moins d'1h des cols.",
+      "Prévoyez des vêtements chauds : les nuits en altitude descendent sous 5°C même en été.",
+    ],
+    links: [
+      {icon:"⛺", label:"Refuge des Oulettes de Gaube", url:"https://refugedesoulettes.ffcam.fr", note:"Réservation obligatoire"},
+      {icon:"⛺", label:"Refuge de Baysellance", url:"https://www.refuges-pyrenees.com/refuge-baysellance", note:"Dernier refuge avant Vignemale"},
+      {icon:"🏞️", label:"Parc National des Pyrénées", url:"https://www.pyrenees-parcnational.fr", note:"Règles de bivouac dans le parc"},
+    ],
+  },
+  {
+    id: 7,
+    emoji: "🦅",
+    title: "Tour des Lacs d'Ossau",
+    region: "Vallée d'Ossau · Béarn (64)",
+    level: "modere",
+    levelLabel: "⬛ Modéré",
+    tags: ["modere","pyrenees","3jours"],
+    jours: "3 jours",
+    kmJour: "~17 km/j",
+    totalKm: "52 km",
+    denivelé: "3 100 m",
+    img: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=900&q=80",
+    depart: "Gabas (64440) — parking du lac de Bious-Artigues",
+    acces: "Depuis Pau : 1h15 · Depuis Bayonne : 1h45",
+    sommet: "Col de Peyreget (2 208 m)",
+    balisage: "GR 10 + sentiers balisés Ossau",
+    eau: "Lacs de Bious, d'Anglas, de Peyreget",
+    ravito: "Cabane de Peyreget (non gardée)",
+    carte: "IGN Top 25 · 1547 OT — Ossau / Vallée d'Aspe",
+    etapes: [
+      ["J1","Bious-Artigues → Lacs d'Ayous → Col d'Ayous","17 km","+1 150/−350 m","Lac d'Ayous (2 185 m) — vue iconique face au Pic du Midi"],
+      ["J2","Col d'Ayous → Lac de Bersau → Lac d'Anglas → Col d'Anglas","19 km","+1 100/−950 m","Lac d'Anglas (2 065 m)"],
+      ["J3","Col d'Anglas → Lac de Peyreget → Col de Peyreget → Bious-Artigues","16 km","+850/−1 750 m","Retour au point de départ"],
+    ],
+    tips: [
+      "Le lac d'Ayous offre l'un des plus beaux panoramas des Pyrénées face au Pic du Midi d'Ossau.",
+      "Les isards et vautours fauves sont fréquents — emportez des jumelles.",
+      "Évitez ce circuit par temps d'orage : les crêtes sont très exposées à la foudre.",
+    ],
+    links: [
+      {icon:"⛺", label:"Refuge d'Ayous", url:"https://www.refuge-ayous.com", note:"Gardé, dortoirs disponibles"},
+      {icon:"🗺️", label:"Wikiloc – Lacs d'Ossau", url:"https://fr.wikiloc.com/itineraires-randonnee-pedestres/tour-des-lacs-ossau", note:"GPS track téléchargeable"},
+      {icon:"🏞️", label:"Vallée d'Ossau Tourisme", url:"https://www.ossau-pyrenees.com/randonnees", note:"Guide randonnées local"},
+    ],
+  },
+  {
+    id: 8,
+    emoji: "🌞",
+    title: "Boucle Cerdagne – Pic Carlit",
+    region: "Pyrénées orientales (66)",
+    level: "difficile",
+    levelLabel: "⬛⬛ Difficile",
+    tags: ["difficile","pyrenees","4jours+"],
+    jours: "5 jours",
+    kmJour: "~18 km/j",
+    totalKm: "90 km",
+    denivelé: "5 500 m",
+    img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900&q=80",
+    depart: "Les Angles (66210) — parking du lac des Bouillouses",
+    acces: "Depuis Perpignan : 1h45 · Depuis Toulouse : 2h30",
+    sommet: "Pic Carlit (2 921 m) — point culminant des Pyrénées orientales",
+    balisage: "GR 10 + sentiers RNR Carlit",
+    eau: "Nombreux lacs, Lac des Bouillouses",
+    ravito: "Gîte des Bouillouses au départ",
+    carte: "IGN Top 25 · 2249 ET — Font Romeu / Capcir",
+    etapes: [
+      ["J1","Bouillouses → Tour du lac → Lac du Campcardos","16 km","+900/−500 m","Lac du Campcardos (2 310 m)"],
+      ["J2","Campcardos → Portella de Mantet → Mantet","20 km","+1 200/−1 050 m","Zone bivouac Mantet (1 700 m)"],
+      ["J3","Mantet → Col de la Comassa → Lac de Lanós","18 km","+1 050/−900 m","Lac de Lanós (2 213 m)"],
+      ["J4","Lac de Lanós → Ascension Pic Carlit → Bouillouses","20 km","+1 550/−1 500 m","Lac des Bouillouses (2 017 m)"],
+      ["J5","Tour final Bouillouses → Les Angles","16 km","+800/−900 m","Retour au point de départ"],
+    ],
+    tips: [
+      "Le Pic Carlit se gravit facilement depuis les Bouillouses en aller-retour (3h).",
+      "Les Bouillouses sont accessibles en navette depuis Les Angles en juillet-août.",
+      "La Cerdagne est l'une des régions les plus ensoleillées de France — protection solaire obligatoire.",
+      "Orages fréquents l'après-midi en été : partez tôt le matin pour les crêtes.",
+    ],
+    links: [
+      {icon:"🌿", label:"Réserve Naturelle du Carlit", url:"https://www.reserves-naturelles.org/carlit", note:"Réglementation + faune"},
+      {icon:"🏠", label:"Gîte des Bouillouses", url:"https://www.bouillouses.fr", note:"Hébergement au départ"},
+      {icon:"🗺️", label:"Pyrénées Catalanes Tourisme", url:"https://www.pyrenees-catalanes.fr", note:"Infos régionales"},
+    ],
+  },
+  {
+    id: 9,
+    emoji: "🏔️",
+    title: "Grand Tour du Pic du Midi d'Ossau",
+    region: "Béarn / Aragon (64 · ES)",
+    level: "difficile",
+    levelLabel: "⬛⬛ Difficile",
+    tags: ["difficile","pyrenees","4jours+"],
+    jours: "4 jours",
+    kmJour: "~15 km/j",
+    totalKm: "62 km",
+    denivelé: "3 800 m",
+    img: "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=900&q=80",
+    depart: "Gabas (64440) — parking du lac de Bious-Artigues",
+    acces: "Depuis Pau : 1h15 · Depuis Bayonne : 1h45",
+    sommet: "Passage en Espagne + Col d'Ayous (2 185 m)",
+    balisage: "GR 10 (France) + GR 11 (Espagne)",
+    eau: "Refuges espagnols Pombie, Respomuso + sources altitude",
+    ravito: "Refuge de Pombie (Espagne) — repas disponibles",
+    carte: "IGN 1547 OT + Editorial Alpina n°25 (Espagne)",
+    etapes: [
+      ["J1","Bious-Artigues → Col d'Ayous → Refuge d'Ayous → Portalet","16 km","+1 200/−600 m","Refuge d'Ayous (2 185 m)"],
+      ["J2","Portalet → Refuge de Pombie (versant espagnol)","15 km","+950/−850 m","Refuge de Pombie (2 040 m)"],
+      ["J3","Pombie → Col de Peyreget → Tour versant sud → Lac de Peyreget","17 km","+1 100/−1 000 m","Lac de Peyreget (2 000 m)"],
+      ["J4","Lac de Peyreget → Col Long de Magnabaigt → Bious-Artigues","14 km","+550/−1 350 m","Retour au point de départ"],
+    ],
+    tips: [
+      "Le Pic du Midi d'Ossau (2 884 m) est réservé aux alpinistes équipés — ne pas tenter sans matériel.",
+      "Passage en Espagne (J2) : aucune formalité pour les citoyens européens.",
+      "Le Refuge de Pombie propose repas et ravitaillement — idéal pour alléger le sac.",
+      "Les vautours fauves survolent en permanence cette zone — spectacle garanti !",
+    ],
+    links: [
+      {icon:"⛺", label:"Refuge d'Ayous", url:"https://www.refuge-ayous.com", note:"Réservation en ligne"},
+      {icon:"⛺", label:"Refugio de Pombie (Espagne)", url:"https://www.refugiodepombie.com", note:"Refuge gardé côté Aragon"},
+      {icon:"📷", label:"Altituderando – Tour Midi d'Ossau", url:"https://www.altituderando.com/Tour-du-Pic-du-Midi-d-Ossau", note:"Description complète + photos"},
+      {icon:"🗺️", label:"GR 10 – Pyrénéisme", url:"https://www.pyrenees.com/gr10", note:"Topoguide officiel GR 10"},
+    ],
+  },
+];
+
+const MATERIEL = [
+  {icon:"🏕️", name:"Tente 3 saisons légère (2–3 pers.)", prio:"rouge", pLabel:"Indispensable", prix:"80–250 €", ou:"Décathlon, Salomon, MSR"},
+  {icon:"🛌", name:"Sac de couchage (confort 0°C à −5°C)", prio:"rouge", pLabel:"Indispensable", prix:"60–200 €", ou:"Décathlon Forclaz, Vaude, Rab"},
+  {icon:"🛏️", name:"Matelas isolant (Thermarest ou mousse)", prio:"rouge", pLabel:"Indispensable", prix:"20–80 €", ou:"Décathlon, Sea to Summit"},
+  {icon:"💧", name:"Filtre à eau (Sawyer Squeeze ou Katadyn)", prio:"orange", pLabel:"Très utile", prix:"30–60 €", ou:"Décathlon, Amazon"},
+  {icon:"🍳", name:"Réchaud + gaz + casserole légère", prio:"orange", pLabel:"Très utile", prix:"30–80 €", ou:"Décathlon, MSR, Jetboil"},
+  {icon:"🥘", name:"Nourriture lyophilisée ou déshydratée", prio:"orange", pLabel:"Très utile", prix:"5–12 €/repas", ou:"Freeze-dry.fr, Trek'n'Eat"},
+  {icon:"🧃", name:"Gourde 1L + poche à eau 2L", prio:"orange", pLabel:"Très utile", prix:"10–30 €", ou:"Décathlon, Nalgene, Hydrapak"},
+  {icon:"🧦", name:"Vêtements de rechange + couche chaude", prio:"orange", pLabel:"Très utile", prix:"Variable", ou:"Polaire ou doudoune légère"},
+  {icon:"🔦", name:"Lampe frontale + piles de rechange", prio:"jaune", pLabel:"Utile", prix:"15–40 €", ou:"Petzl, Black Diamond"},
+  {icon:"🩹", name:"Trousse de premiers secours", prio:"jaune", pLabel:"Utile", prix:"15–30 €", ou:"Pharmacie, Décathlon"},
+  {icon:"📱", name:"App. Maps.me ou OruxMaps (offline)", prio:"jaune", pLabel:"Utile", prix:"Gratuit", ou:"Téléchargez avant de partir"},
+  {icon:"🧴", name:"Crème solaire SPF 50+ + anti-insectes", prio:"jaune", pLabel:"Utile", prix:"10–20 €", ou:"Pharmacie, supermarché"},
+];
+
+const REGLES = [
+  {icon:"🕗", title:"Horaires autorisés", text:"Le bivouac est autorisé à partir de 19h et jusqu'à 9h le lendemain matin. En dehors de ces horaires, vous devez être en déplacement."},
+  {icon:"🚗", title:"Distance des routes", text:"Bivouaquer à plus d'1 heure de marche des routes, parkings et accès motorisés. Cela garantit un minimum d'isolement et de tranquillité."},
+  {icon:"🏞️", title:"Parcs nationaux", text:"Le bivouac est strictement interdit dans les cœurs de parcs nationaux (Pyrénées). Vérifiez toujours les zones autorisées avant de partir."},
+  {icon:"🗑️", title:"Déchets", text:"Emportez absolument tous vos déchets, y compris organiques. Laissez le site comme vous l'avez trouvé — voire plus propre."},
+  {icon:"🔥", title:"Feux de camp", text:"Les feux sont interdits en montagne et dans les zones à risque. Utilisez exclusivement un réchaud à gaz ou à alcool."},
+  {icon:"🌊", title:"Eau & sanitaires", text:"Ne polluez jamais les cours d'eau. Enterrez vos déchets organiques à plus de 70m de toute source d'eau. Utilisez du savon biodégradable uniquement."},
+];
+
+// ─────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────
+
+function levelClass(l) {
+  return l === 'facile' ? 'level-facile' : l === 'modere' ? 'level-modere' : 'level-difficile';
+}
+
+function renderCards(filter = 'all') {
+  const grid = document.getElementById('cardsGrid');
+  const filtered = filter === 'all' ? CIRCUITS : CIRCUITS.filter(c => c.tags.includes(filter));
+  grid.innerHTML = filtered.map(c => `
+    <div class="card" onclick="openModal(${c.id})">
+      <div class="card-img">
+        <div class="card-img-inner" style="background-image:url('${c.img}')"></div>
+        <span class="card-level ${levelClass(c.level)}">${c.levelLabel}</span>
+        <span class="card-region">${c.region}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-emoji">${c.emoji}</div>
+        <div class="card-title">${c.title}</div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">${c.jours}</span><span class="stat-key">Durée</span></div>
+          <div class="stat"><span class="stat-val">${c.kmJour}</span><span class="stat-key">Par jour</span></div>
+          <div class="stat"><span class="stat-val">${c.totalKm}</span><span class="stat-key">Total</span></div>
+          <div class="stat"><span class="stat-val">${c.denivelé}</span><span class="stat-key">D+ total</span></div>
+        </div>
+        <span class="card-open-btn">Voir le détail <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderMateriel() {
+  document.getElementById('materielGrid').innerHTML = MATERIEL.map(m => `
+    <div class="materiel-card">
+      <div class="materiel-top">
+        <span class="materiel-icon">${m.icon}</span>
+        <span class="prio-badge prio-${m.prio}">${m.pLabel}</span>
+      </div>
+      <div class="materiel-name">${m.name}</div>
+      <div class="materiel-prix">${m.prix}</div>
+      <div class="materiel-ou">${m.ou}</div>
+    </div>
+  `).join('');
+}
+
+function renderRegles() {
+  document.getElementById('reglesGrid').innerHTML = REGLES.map(r => `
+    <div class="regle-card">
+      <div class="regle-icon">${r.icon}</div>
+      <div class="regle-title">${r.title}</div>
+      <div class="regle-text">${r.text}</div>
+    </div>
+  `).join('');
+}
+
+// ─────────────────────────────────────────
+// MODAL
+// ─────────────────────────────────────────
+
+function openModal(id) {
+  const c = CIRCUITS.find(x => x.id === id);
+  document.getElementById('modalHeroImg').style.backgroundImage = `url('${c.img}')`;
+  document.getElementById('modalTitle').textContent = `${c.emoji}  ${c.title}`;
+  document.getElementById('modalSub').textContent = `${c.region}  ·  ${c.levelLabel}  ·  ${c.jours}  ·  ${c.totalKm}  ·  D+ ${c.denivelé}`;
+
+  document.getElementById('modalBody').innerHTML = `
+    <div class="modal-stats-row">
+      <div class="modal-stat"><div class="modal-stat-icon">📅</div><span class="modal-stat-val">${c.jours}</span><div class="modal-stat-key">Durée</div></div>
+      <div class="modal-stat"><div class="modal-stat-icon">📏</div><span class="modal-stat-val">${c.kmJour}</span><div class="modal-stat-key">Par jour</div></div>
+      <div class="modal-stat"><div class="modal-stat-icon">🗺️</div><span class="modal-stat-val">${c.totalKm}</span><div class="modal-stat-key">Distance totale</div></div>
+      <div class="modal-stat"><div class="modal-stat-icon">⛰️</div><span class="modal-stat-val">${c.denivelé}</span><div class="modal-stat-key">D+ total</div></div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">📍 Informations pratiques</div>
+      <div class="info-grid">
+        <span class="info-label">Départ / Arrivée</span><span class="info-val">${c.depart}</span>
+        <span class="info-label">Accès</span><span class="info-val">${c.acces}</span>
+        <span class="info-label">Point culminant</span><span class="info-val">${c.sommet}</span>
+        <span class="info-label">Balisage</span><span class="info-val">${c.balisage}</span>
+        <span class="info-label">Eau</span><span class="info-val">${c.eau}</span>
+        <span class="info-label">Ravitaillement</span><span class="info-val">${c.ravito}</span>
+        <span class="info-label">Carte IGN</span><span class="info-val">${c.carte}</span>
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">📅 Étapes journalières</div>
+      <table class="etapes-table">
+        <thead><tr><th>Jour</th><th>Tronçon</th><th>Dist.</th><th>D+/D−</th><th>Bivouac conseillé</th></tr></thead>
+        <tbody>
+          ${c.etapes.map(e=>`<tr>
+            <td class="jour">${e[0]}</td>
+            <td>${e[1]}</td>
+            <td class="dist">${e[2]}</td>
+            <td class="deni">${e[3]}</td>
+            <td><span class="bivouac-dot"></span>${e[4]}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">💡 Conseils pratiques</div>
+      <ul class="tips-list">
+        ${c.tips.map(t=>`<li>${t}</li>`).join('')}
+      </ul>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">🔗 Liens & ressources</div>
+      <div class="links-list">
+        ${c.links.map(l=>`<a class="ext-link" href="${l.url}" target="_blank" rel="noopener">
+          <span class="ext-link-icon">${l.icon}</span>
+          <div>
+            <div class="ext-link-label">${l.label}</div>
+            <div class="ext-link-note">${l.note}</div>
+          </div>
+          <span class="ext-link-arrow">→</span>
+        </a>`).join('')}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModalBtn() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalBtn();
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModalBtn(); });
+
+// ─────────────────────────────────────────
+// FILTERS
+// ─────────────────────────────────────────
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCards(btn.dataset.filter);
+  });
+});
+
+// ─────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────
+renderCards();
+renderMateriel();
+renderRegles();
+</script>
+</body>
+</html>
