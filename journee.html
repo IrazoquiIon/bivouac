@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Randos à la journée – Bivouac PB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-icon">⛰️</span>
+      <span>Bivouac<em>PB</em></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Circuits</a>
+      <a href="journee.html" class="active">Randos journée</a>
+      <a href="guide.html">Guide bivouac</a>
+      <a href="carte.html">Carte</a>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Circuits</a>
+    <a href="journee.html">Randos journée</a>
+    <a href="guide.html">Guide bivouac</a>
+    <a href="carte.html">Carte</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container page-hero-content">
+    <p class="page-hero-eyebrow">Sans bivouac · Pays Basque</p>
+    <h1 class="page-hero-title">Randos <em>à la journée</em></h1>
+    <p class="page-hero-sub">Départ de Bayonne à 10h · Retour à 18h · Niveau moyen<br>Tout le plaisir de la montagne basque, sans le sac de 15 kg.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Infobanner -->
+    <div style="background:#f0faf4;border:1.5px solid #a8d5ba;border-radius:1rem;padding:1.2rem 1.5rem;margin-bottom:3rem;display:flex;gap:1rem;align-items:flex-start">
+      <span style="font-size:1.5rem;flex-shrink:0">🚗</span>
+      <div>
+        <div style="font-weight:600;color:#162a1e;margin-bottom:.3rem">Plan type : départ Bayonne 10h → retour 18h</div>
+        <div style="font-size:.83rem;color:#6b6560;line-height:1.6">Comptez 30–45 min de trajet aller. Pique-nique au sommet conseillé. Vérifiez la météo la veille sur <a href="https://meteofrance.com/meteo-montagne/pyrenees" target="_blank" style="color:#2a5c3f;text-decoration:underline">Météo France montagne</a>. Chaussures de marche recommandées pour tous les circuits.</div>
+      </div>
+    </div>
+
+    <div class="journee-grid" id="journeeGrid"></div>
+
+    <!-- Quote -->
+    <div style="text-align:center;padding:4rem 0 2rem">
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,3vw,2rem);font-style:italic;color:#2a5c3f;max-width:600px;margin:0 auto;line-height:1.4">
+        "Ces randonnées sont le meilleur moyen de tomber amoureux du Pays Basque avant de se lancer dans le bivouac."
+      </blockquote>
+      <p style="margin-top:1rem;font-size:.8rem;color:#6b6560">— Et une bonne excuse pour aller manger au restaurant à Bidarray au retour</p>
+    </div>
+
+    <!-- CTA vers bivouac -->
+    <div style="background:var(--forest);border-radius:1.2rem;padding:2.5rem;text-align:center;margin-top:2rem">
+      <p style="font-family:var(--font-mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:.8rem">Prêt à aller plus loin ?</p>
+      <h2 style="font-family:var(--font-serif);font-size:2rem;color:white;margin-bottom:.8rem">Passez au <em style="color:var(--sage);font-style:italic">bivouac</em></h2>
+      <p style="color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:1.8rem">9 circuits en boucle de 2 à 5 jours vous attendent.</p>
+      <a href="index.html" class="btn btn-primary">Voir les circuits bivouac →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">⛰️ BivouacPB</div>
+        <p class="footer-tagline">Le plus beau bivouac, c'est toujours le premier.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <div class="footer-col-title">Navigation</div>
+          <a href="index.html">Circuits bivouac</a>
+          <a href="journee.html">Randos journée</a>
+          <a href="guide.html">Guide bivouac</a>
+          <a href="carte.html">Carte</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Ressources</div>
+          <a href="https://www.altituderando.com" target="_blank">Altituderando</a>
+          <a href="https://fr.wikiloc.com" target="_blank">Wikiloc</a>
+          <a href="https://meteofrance.com/meteo-montagne/pyrenees" target="_blank">Météo montagne</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>☎️ Urgences montagne : <strong>112</strong> · PGHM Pau : <strong>05 62 92 41 41</strong></span>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+<script>
+document.getElementById('navBurger').addEventListener('click',()=>{
+  document.getElementById('navMobile').classList.toggle('open');
+});
+
+document.getElementById('journeeGrid').innerHTML = RANDOS_JOURNEE.map(r=>`
+  <div class="jcard animate-in">
+    <div class="jcard-img" style="background-image:url('${r.img}')">
+      <div class="jcard-dist">${r.distanceBayonne}</div>
+    </div>
+    <div class="jcard-body">
+      <div class="jcard-emoji">${r.emoji}</div>
+      <h3 class="jcard-title">${r.title}</h3>
+      <p class="jcard-desc">${r.description}</p>
+      <div class="jcard-meta">
+        <span class="jmeta"><strong>${r.distance}</strong> distance</span>
+        <span class="jmeta"><strong>${r.duree}</strong> durée</span>
+        <span class="jmeta"><strong>${r.denivelé}</strong> D+</span>
+      </div>
+      <div class="jcard-highlights">
+        ${r.highlights.map(h=>`<span class="highlight">✓ ${h}</span>`).join('')}
+      </div>
+      <div style="font-size:.75rem;color:#6b6560;margin-bottom:.7rem">📌 ${r.depart}</div>
+      <div class="jcard-links">
+        ${r.links.map(l=>`
+          <a class="jcard-link" href="${l.url}" target="_blank" rel="noopener">
+            <span>${l.icon}</span>
+            <span>${l.label}</span>
+            <span style="margin-left:auto;color:#aaa">↗</span>
+          </a>
+        `).join('')}
+      </div>
+    </div>
+  </div>
+`).join('');
+</script>
+</body>
+</html>
