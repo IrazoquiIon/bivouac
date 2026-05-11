@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page introuvable – BivouacPB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛰️</text></svg>">
+<style>
+.notfound {
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  background:var(--forest); padding:2rem;
+}
+.nf-code {
+  font-family:var(--font-mono); font-size:.75rem; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--sage); margin-bottom:1.5rem;
+}
+.nf-title {
+  font-family:var(--font-serif); font-size:clamp(3rem,8vw,6rem);
+  font-weight:700; color:white; line-height:.95;
+  margin-bottom:1.5rem;
+}
+.nf-title em { color:var(--sage); font-style:italic; }
+.nf-sub {
+  font-size:1rem; color:rgba(255,255,255,.45); max-width:420px;
+  line-height:1.7; margin-bottom:2.5rem;
+}
+.nf-links { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+</style>
+</head>
+<body>
+
+<div class="notfound">
+  <p class="nf-code">Erreur 404</p>
+  <h1 class="nf-title">Sentier<br><em>introuvable</em></h1>
+  <p class="nf-sub">
+    Il semblerait que ce chemin n'existe pas — ou qu'il a été effacé par la neige.
+    Retournez au point de départ.
+  </p>
+  <div class="nf-links">
+    <a href="index.html" class="btn btn-primary">⛰️ Retour aux circuits</a>
+    <a href="journee.html" class="btn btn-ghost">Randos journée</a>
+  </div>
+</div>
+
+</body>
+</html>

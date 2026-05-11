@@ -4,10 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bivouac Pyrénées & Pays Basque</title>
-<meta name="description" content="9 circuits de randonnée en boucle avec bivouac dans les Pyrénées et le Pays Basque. Débutants à confirmés.">
+<meta name="description" content="25 circuits de randonnée en boucle avec bivouac dans les Pyrénées, le Pays Basque, l'Ariège et les Orientales. Débutants à experts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛰️</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bivouac Pyrénées & Pays Basque — 25 circuits">
+<meta property="og:description" content="25 circuits de randonnée en boucle avec bivouac dans les Pyrénées et le Pays Basque. Débutants à experts.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1609766857823-56b5f81a7d67?w=1200&q=80">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
@@ -46,7 +52,7 @@
       <span class="hero-title-line">Partir</span>
       <span class="hero-title-line italic">bivouaquer</span>
     </h1>
-    <p class="hero-desc">9 circuits en boucle · 2 à 5 jours · Départ = Arrivée<br>Du débutant au confirmé · Nuit sous les étoiles</p>
+    <p class="hero-desc"><span id="stat-hero-count">25</span> circuits en boucle · 2 à 12 jours · Départ = Arrivée<br>Du débutant à l'expert · Nuit sous les étoiles</p>
     <div class="hero-cta">
       <a href="#circuits" class="btn btn-primary">Explorer les circuits</a>
       <a href="guide.html" class="btn btn-ghost">Guide du bivouac →</a>
@@ -57,11 +63,11 @@
     <span>défiler</span>
   </div>
   <div class="hero-stats">
-    <div class="hero-stat"><span class="stat-num">9</span><span class="stat-lbl">circuits</span></div>
+    <div class="hero-stat"><span class="stat-num" id="stat-count">25</span><span class="stat-lbl">circuits</span></div>
     <div class="hero-stat-sep"></div>
-    <div class="hero-stat"><span class="stat-num">2→5</span><span class="stat-lbl">jours</span></div>
+    <div class="hero-stat"><span class="stat-num">2→12</span><span class="stat-lbl">jours</span></div>
     <div class="hero-stat-sep"></div>
-    <div class="hero-stat"><span class="stat-num">2</span><span class="stat-lbl">régions</span></div>
+    <div class="hero-stat"><span class="stat-num">4</span><span class="stat-lbl">zones</span></div>
     <div class="hero-stat-sep"></div>
     <div class="hero-stat"><span class="stat-num">∞</span><span class="stat-lbl">étoiles</span></div>
   </div>
@@ -74,22 +80,36 @@
       <p class="section-eyebrow">Les itinéraires</p>
       <h2 class="section-title">Choisissez votre <em>aventure</em></h2>
     </div>
+  </div>
 
-    <!-- Filters -->
-    <div class="filters" id="filters">
-      <button class="filter active" data-f="all">Tous <span class="filter-count" id="fc-all"></span></button>
-      <button class="filter" data-f="facile">🟢 Débutant</button>
-      <button class="filter" data-f="modere">🟡 Modéré</button>
-      <button class="filter" data-f="difficile">🔴 Difficile</button>
-      <span class="filter-sep">|</span>
-      <button class="filter" data-f="paysbasque">🌿 Pays Basque</button>
-      <button class="filter" data-f="pyrenees">🏔️ Pyrénées</button>
-      <span class="filter-sep">|</span>
-      <button class="filter" data-f="2">📅 2 jours</button>
-      <button class="filter" data-f="3">📅 3 jours</button>
-      <button class="filter" data-f="45">📅 4–5 jours</button>
+  <!-- Sticky filter + search bar -->
+  <div class="filters-wrap" id="filtersWrap">
+    <div class="container">
+      <div class="search-row">
+        <input type="search" id="searchInput" class="search-input" placeholder="Rechercher un circuit, une région…" autocomplete="off">
+      </div>
+      <div class="filters" id="filters">
+        <button class="filter active" data-f="all">Tous <span class="filter-count" id="fc-all"></span></button>
+        <button class="filter" data-f="facile">🟢 Débutant</button>
+        <button class="filter" data-f="modere">🟡 Modéré</button>
+        <button class="filter" data-f="difficile">🔴 Difficile</button>
+        <button class="filter" data-f="expert">⚫ Expert</button>
+        <span class="filter-sep">|</span>
+        <button class="filter" data-f="paysbasque">🌿 Pays Basque</button>
+        <button class="filter" data-f="pyrenees">🏔️ Pyrénées</button>
+        <button class="filter" data-f="ariege">🐺 Ariège</button>
+        <button class="filter" data-f="orientales">🌞 Orientales</button>
+        <span class="filter-sep">|</span>
+        <button class="filter" data-f="2">📅 2 jours</button>
+        <button class="filter" data-f="3">📅 3 jours</button>
+        <button class="filter" data-f="45">📅 4–6 jours</button>
+        <button class="filter" data-f="long">📅 7j+</button>
+      </div>
+      <p class="results-count" id="resultsCount"></p>
     </div>
+  </div>
 
+  <div class="container" style="padding-top:1.5rem">
     <div class="cards-grid" id="cardsGrid"></div>
   </div>
 </section>
@@ -101,7 +121,7 @@
       <div class="teaser-text">
         <p class="section-eyebrow" style="color:var(--sage)">Pas prêt pour le bivouac ?</p>
         <h2 class="section-title" style="color:white">Randos <em>à la journée</em><br>près de Bayonne</h2>
-        <p style="color:rgba(255,255,255,.55);line-height:1.7;margin-top:.8rem">4 circuits de day-hike niveau moyen, à moins de 45 min de Bayonne. Partez à 10h, rentrez à 18h.</p>
+        <p style="color:rgba(255,255,255,.55);line-height:1.7;margin-top:.8rem"><span id="teaserRandoCount">16</span> randos à la journée · 30 min à 2h30 · Du facile à l'exigeant. Zéro bivouac, 100% plaisir.</p>
         <a href="journee.html" class="btn btn-primary" style="margin-top:1.8rem">Voir les randos journée →</a>
       </div>
       <div class="teaser-cards">
@@ -246,28 +266,64 @@
   window.addEventListener('resize',()=>{ resize(); mkStars(); });
 })();
 
-// ── Nav scroll behavior ───────────────────────────────────
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
-});
+// ── Nav + burger ──────────────────────────────────────────
+initNav();
 
-// ── Burger menu ───────────────────────────────────────────
-document.getElementById('navBurger').addEventListener('click',()=>{
-  document.getElementById('navMobile').classList.toggle('open');
-});
+// ── Counts dynamiques ─────────────────────────────────────
+document.getElementById('fc-all').textContent = CIRCUITS.length;
+document.getElementById('stat-count').textContent = CIRCUITS.length;
+document.getElementById('stat-hero-count').textContent = CIRCUITS.length;
+document.getElementById('teaserRandoCount').textContent = RANDOS_JOURNEE.length;
+
+// ── Zone labels ───────────────────────────────────────────
+const ZONE_LABEL = { paysbasque:'🌿 Pays Basque', pyrenees:'🏔️ Pyrénées', ariege:'🐺 Ariège', orientales:'🌞 Orientales' };
+const grid = document.getElementById('cardsGrid');
+const resultsCount = document.getElementById('resultsCount');
+let activeFilter = 'all';
 
 // ── Render circuits ───────────────────────────────────────
-const grid = document.getElementById('cardsGrid');
-document.getElementById('fc-all').textContent = CIRCUITS.length;
-
 function renderCards(filter){
+  activeFilter = filter;
+  const searchQ = document.getElementById('searchInput').value.toLowerCase().trim();
+
   let data = filter === 'all' ? CIRCUITS :
     filter === 'paysbasque' ? CIRCUITS.filter(c=>c.zone==='paysbasque') :
     filter === 'pyrenees' ? CIRCUITS.filter(c=>c.zone==='pyrenees') :
+    filter === 'ariege' ? CIRCUITS.filter(c=>c.zone==='ariege') :
+    filter === 'orientales' ? CIRCUITS.filter(c=>c.zone==='orientales') :
     filter === '2' ? CIRCUITS.filter(c=>c.jours===2) :
     filter === '3' ? CIRCUITS.filter(c=>c.jours===3) :
-    filter === '45' ? CIRCUITS.filter(c=>c.jours>=4) :
+    filter === '45' ? CIRCUITS.filter(c=>c.jours>=4&&c.jours<=6) :
+    filter === 'long' ? CIRCUITS.filter(c=>c.jours>=7) :
     CIRCUITS.filter(c=>c.level===filter);
+
+  if(searchQ){
+    data = data.filter(c =>
+      c.title.toLowerCase().includes(searchQ) ||
+      c.region.toLowerCase().includes(searchQ) ||
+      c.description.toLowerCase().includes(searchQ) ||
+      (c.zone && c.zone.toLowerCase().includes(searchQ))
+    );
+  }
+
+  // Résultats count
+  if(filter === 'all' && !searchQ){
+    resultsCount.innerHTML = '';
+  } else {
+    resultsCount.innerHTML = `<strong>${data.length}</strong> circuit${data.length!==1?'s':''} trouvé${data.length!==1?'s':''}`;
+  }
+
+  // Empty state
+  if(data.length === 0){
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🏔️</div>
+        <div class="empty-title">Aucun circuit trouvé</div>
+        <div class="empty-sub">Essayez un autre filtre ou effacez votre recherche.</div>
+        <button class="empty-reset" onclick="resetFilters()">Tout afficher</button>
+      </div>`;
+    return;
+  }
 
   grid.innerHTML = data.map((c,i)=>`
     <article class="card animate-in" style="animation-delay:${i*60}ms" onclick="openModal(${c.id})">
@@ -278,7 +334,7 @@ function renderCards(filter){
           <span class="badge" style="background:${c.levelColor}22;color:${c.levelColor};border-color:${c.levelColor}44">${c.levelLabel}</span>
           <span class="badge badge-days">${c.jours}j</span>
         </div>
-        <div class="card-zone">${c.zone==='pyrenees'?'🏔️ Pyrénées':'🌿 Pays Basque'}</div>
+        <div class="card-zone">${ZONE_LABEL[c.zone]||c.zone}</div>
       </div>
       <div class="card-body">
         <div class="card-emoji">${c.emoji}</div>
@@ -301,6 +357,13 @@ function renderCards(filter){
   `).join('');
 }
 
+function resetFilters(){
+  document.getElementById('searchInput').value = '';
+  document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.filter[data-f="all"]').classList.add('active');
+  renderCards('all');
+}
+
 // Filter clicks
 document.getElementById('filters').addEventListener('click',e=>{
   const btn = e.target.closest('.filter');
@@ -309,6 +372,22 @@ document.getElementById('filters').addEventListener('click',e=>{
   btn.classList.add('active');
   renderCards(btn.dataset.f);
 });
+
+// Search input
+document.getElementById('searchInput').addEventListener('input',()=>{
+  renderCards(activeFilter);
+});
+
+// Sticky filter detection
+const filtersWrap = document.getElementById('filtersWrap');
+if(filtersWrap){
+  const sentinel = document.createElement('div');
+  sentinel.style.cssText='height:1px;pointer-events:none';
+  filtersWrap.parentElement.insertBefore(sentinel, filtersWrap);
+  new IntersectionObserver(([e])=>{
+    filtersWrap.classList.toggle('stuck', !e.isIntersecting);
+  },{rootMargin:'-53px 0px 0px 0px'}).observe(sentinel);
+}
 
 // URL param filter
 const urlF = new URLSearchParams(location.search).get('f');

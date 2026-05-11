@@ -7,6 +7,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛰️</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Randos à la journée – BivouacPB">
+<meta property="og:description" content="16 randos à la journée dans les Pyrénées et le Pays Basque. Départ de Bayonne, retour le soir — zéro bivouac, 100% plaisir.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1200&q=80">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
@@ -104,9 +110,7 @@
 <script src="data.js"></script>
 <script src="main.js"></script>
 <script>
-document.getElementById('navBurger').addEventListener('click',()=>{
-  document.getElementById('navMobile').classList.toggle('open');
-});
+initNav();
 
 document.getElementById('journeeGrid').innerHTML = RANDOS_JOURNEE.map(r=>`
   <div class="jcard animate-in">

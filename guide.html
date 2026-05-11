@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide du Bivouac – BivouacPB</title>
+<meta name="description" content="Tout savoir sur le bivouac en montagne : matériel indispensable, règles légales, numéros d'urgence et conseils pratiques pour les Pyrénées.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛰️</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Guide du Bivouac – BivouacPB">
+<meta property="og:description" content="Matériel indispensable, règles légales, numéros d'urgence — tout ce qu'il faut savoir avant de bivouaquer dans les Pyrénées.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+.rule-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1rem; margin-top:2rem; }
+.rule-card {
+  background:white; border-radius:.9rem; padding:1.2rem 1.4rem;
+  border-left:4px solid var(--sage); box-shadow:var(--shadow);
+}
+.rule-icon { font-size:1.6rem; margin-bottom:.5rem; }
+.rule-title { font-family:var(--font-serif); font-size:1rem; font-weight:700; color:var(--forest); margin-bottom:.4rem; }
+.rule-desc { font-size:.81rem; color:var(--rock); line-height:1.65; }
+.intro-note {
+  background:#f0faf4; border:1.5px solid var(--mist); border-radius:1rem;
+  padding:1.2rem 1.5rem; margin-bottom:3rem;
+  display:flex; gap:1rem; align-items:flex-start;
+  font-size:.85rem; color:var(--rock); line-height:1.6;
+}
+.intro-note strong { color:var(--forest); }
+@media (max-width:680px) {
+  .rule-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-icon">⛰️</span>
+      <span>Bivouac<em>PB</em></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Circuits</a>
+      <a href="journee.html">Randos journée</a>
+      <a href="guide.html" class="active">Guide bivouac</a>
+      <a href="carte.html">Carte</a>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Circuits</a>
+    <a href="journee.html">Randos journée</a>
+    <a href="guide.html">Guide bivouac</a>
+    <a href="carte.html">Carte</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container page-hero-content">
+    <p class="page-hero-eyebrow">Tout savoir</p>
+    <h1 class="page-hero-title">Guide du <em>bivouac</em></h1>
+    <p class="page-hero-sub">Règles, matériel et urgences — tout ce qu'il faut savoir<br>avant de passer votre première nuit sous les étoiles pyrénéennes.</p>
+  </div>
+</header>
+
+<!-- ── INTRO CARDS ── -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Les bases</p>
+      <h2 class="section-title">Bivouaquer, <em>c'est quoi ?</em></h2>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card">
+        <div class="guide-card-icon">🌙</div>
+        <div class="guide-card-title">Une nuit à la belle étoile</div>
+        <div class="guide-card-text">Le bivouac, c'est camper en pleine nature avec votre propre équipement — sans infrastructure permanente. Légal dans des horaires stricts, il est l'une des façons les plus intenses de vivre la montagne.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-card-icon">📍</div>
+        <div class="guide-card-title">Choisir son emplacement</div>
+        <div class="guide-card-text">Terrain plat, à l'abri du vent, loin des sentiers (discrétion) et à ≥ 50 m de tout cours d'eau. Évitez les zones humides, les replats exposés à la foudre et les éboulis. Hors zones protégées.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-card-icon">🌤️</div>
+        <div class="guide-card-title">La météo est reine</div>
+        <div class="guide-card-text">Consultez Météo France Montagne <strong>chaque veille de sortie</strong>. En altitude, un orage peut se lever en 30 min. Descendre tôt vaut mieux que rester coincé sur une crête sous la grêle.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-card-icon">🌿</div>
+        <div class="guide-card-title">Leave No Trace</div>
+        <div class="guide-card-text">La règle d'or : repartir sans laisser la moindre trace. Aucun déchet, aucune végétation arrachée, aucun feu. Si vous avez bien bivouaqué, personne ne doit savoir que vous étiez là.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MATÉRIEL ── -->
+<section class="section section-alt" id="materiel">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Équipement</p>
+      <h2 class="section-title">Checklist <em>matériel</em></h2>
+    </div>
+    <div class="intro-note">
+      <span style="font-size:1.5rem;flex-shrink:0">💡</span>
+      <div>
+        <strong>Poids objectif : 10–14 kg max pour 2–3 jours</strong><br>
+        Chaque kilo en moins sur les épaules, c'est 5 km de plaisir en plus. Privilégiez le matériel ultraléger et testez votre sac complet avant de partir.
+      </div>
+    </div>
+    <table class="materiel-table" id="materielTable">
+      <thead>
+        <tr>
+          <th>Équipement</th>
+          <th>Priorité</th>
+          <th>Prix indicatif</th>
+          <th>Où trouver</th>
+        </tr>
+      </thead>
+      <tbody id="materielBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── RÈGLES ── -->
+<section class="section" id="regles">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Réglementation</p>
+      <h2 class="section-title">Règles du <em>bivouac</em></h2>
+    </div>
+    <div class="intro-note">
+      <span style="font-size:1.5rem;flex-shrink:0">⚠️</span>
+      <div>
+        <strong>Règle de base hors zones protégées :</strong> bivouac autorisé de 19h à 9h uniquement, à plus d'1 heure de marche des routes et parkings.
+        Dans le cœur du <strong>Parc National des Pyrénées</strong>, seul le bivouac de 19h à 9h est toléré — les feux y sont totalement interdits.
+      </div>
+    </div>
+    <div class="rule-grid" id="reglesGrid"></div>
+  </div>
+</section>
+
+<!-- ── URGENCES ── -->
+<section class="urgences-band" id="urgences">
+  <div class="container">
+    <div class="urgences-inner">
+      <div>
+        <div class="urgences-title">Numéros d'urgence</div>
+        <div class="urgences-sub">Sauvegardez ces numéros <strong>avant de partir</strong>.<br>En montagne, le réseau peut être limité — informez toujours un proche de votre itinéraire.</div>
+      </div>
+      <div class="urgences-nums" id="urgencesNums"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TIPS FINAUX ── -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Pour finir</p>
+      <h2 class="section-title">Avant de <em>partir</em></h2>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card">
+        <div class="guide-card-icon">📞</div>
+        <div class="guide-card-title">Informez un proche</div>
+        <div class="guide-card-text">Envoyez votre itinéraire précis (départ, étapes, point d'arrivée) à un proche resté en vallée. Donnez-lui une heure de retour et un protocole si vous ne donnez pas signe de vie.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-card-icon">📱</div>
+        <div class="guide-card-title">Téléchargez les cartes</div>
+        <div class="guide-card-text">Komoot, Maps.me, OruxMaps ou IGNrando permettent de télécharger les cartes offline. Le réseau disparaît souvent au-dessus de 1 500 m — ne comptez pas sur Google Maps.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-card-icon">🩹</div>
+        <div class="guide-card-title">Trousse de secours minimale</div>
+        <div class="guide-card-text">Pansements adhésifs, bande de contention, compresses, antiseptique, antalgiques, couverture de survie. Ajoutez votre traitement personnel et un mémo des allergies si nécessaire.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-card-icon">🔋</div>
+        <div class="guide-card-title">Énergie et alimentation</div>
+        <div class="guide-card-text">Comptez 400–600 kcal/heure de marche chargée. Emportez toujours un repas de réserve. Les fruits secs, barres énergétiques et repas lyophilisés sont légers et efficaces.</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:3rem">
+      <a href="index.html" class="btn btn-primary">Voir les circuits bivouac →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">⛰️ BivouacPB</div>
+        <p class="footer-tagline">Le plus beau bivouac, c'est toujours le premier.</p>
+        <p class="footer-sub">Laissez la montagne intacte pour les prochains.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <div class="footer-col-title">Navigation</div>
+          <a href="index.html">Circuits bivouac</a>
+          <a href="journee.html">Randos journée</a>
+          <a href="guide.html">Guide bivouac</a>
+          <a href="carte.html">Carte</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Ce guide</div>
+          <a href="#materiel">Checklist matériel</a>
+          <a href="#regles">Règles du bivouac</a>
+          <a href="#urgences">Numéros d'urgence</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Ressources</div>
+          <a href="https://www.altituderando.com" target="_blank">Altituderando</a>
+          <a href="https://fr.wikiloc.com" target="_blank">Wikiloc</a>
+          <a href="https://meteofrance.com/meteo-montagne/pyrenees" target="_blank">Météo montagne</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>☎️ Urgences montagne : <strong>112</strong> · PGHM Pau : <strong>05 62 92 41 41</strong></span>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+<script>
+initNav();
+
+// Matériel table
+document.getElementById('materielBody').innerHTML = MATERIEL.map(m => `
+  <tr>
+    <td>${m.icon} ${m.name}</td>
+    <td><span class="prio-tag prio-${m.prio}">${m.pLabel}</span></td>
+    <td style="font-family:var(--font-mono);font-size:.78rem">${m.prix}</td>
+    <td style="font-size:.78rem;color:var(--rock)">${m.ou}</td>
+  </tr>
+`).join('');
+
+// Règles
+document.getElementById('reglesGrid').innerHTML = REGLES_BIVOUAC.map(r => `
+  <div class="rule-card">
+    <div class="rule-icon">${r.icon}</div>
+    <div class="rule-title">${r.title}</div>
+    <div class="rule-desc">${r.desc}</div>
+  </div>
+`).join('');
+
+// Urgences
+document.getElementById('urgencesNums').innerHTML = URGENCES.map(u => `
+  <div class="urg-card">
+    <div class="urg-label">${u.label}</div>
+    <div class="urg-num">${u.num}</div>
+    <div class="urg-note">${u.note}</div>
+  </div>
+`).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carte des circuits – BivouacPB</title>
+<meta name="description" content="Carte interactive de tous les circuits bivouac et randos journée dans les Pyrénées, le Pays Basque, l'Ariège et les Orientales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛰️</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Carte des circuits – BivouacPB">
+<meta property="og:description" content="Tous les points de départ des circuits bivouac et randos journée dans les Pyrénées sur une carte interactive.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1609766857823-56b5f81a7d67?w=1200&q=80">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+.map-legend {
+  display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.5rem; align-items:center;
+}
+.legend-item {
+  display:flex; align-items:center; gap:.4rem;
+  font-size:.78rem; color:var(--rock); font-family:var(--font-mono);
+}
+.legend-dot {
+  width:12px; height:12px; border-radius:50%; border:2px solid white;
+  box-shadow:0 0 0 1px rgba(0,0,0,.2); flex-shrink:0;
+}
+.legend-sq {
+  width:12px; height:12px; border-radius:2px; border:2px solid white;
+  box-shadow:0 0 0 1px rgba(0,0,0,.2); flex-shrink:0;
+}
+.legend-sep { color:#ccc; margin:0 .4rem; }
+.map-tip {
+  font-size:.8rem; color:var(--rock); margin-top:.8rem; font-style:italic;
+}
+#map { border-radius:1.2rem; box-shadow:var(--shadow-lg); }
+.leaflet-popup-content-wrapper {
+  border-radius:.7rem; box-shadow:0 4px 20px rgba(0,0,0,.15);
+  font-family:'Outfit',sans-serif;
+}
+.map-popup-title { font-family:'Cormorant Garamond',Georgia,serif; font-size:1rem; font-weight:700; color:#162a1e; margin-bottom:.3rem; }
+.map-popup-meta { font-size:.75rem; color:#6b6560; font-family:'Fira Code',monospace; }
+.map-popup-link { display:inline-block; margin-top:.5rem; font-size:.75rem; font-weight:600; color:#2a5c3f; text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-icon">⛰️</span>
+      <span>Bivouac<em>PB</em></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Circuits</a>
+      <a href="journee.html">Randos journée</a>
+      <a href="guide.html">Guide bivouac</a>
+      <a href="carte.html" class="active">Carte</a>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Circuits</a>
+    <a href="journee.html">Randos journée</a>
+    <a href="guide.html">Guide bivouac</a>
+    <a href="carte.html">Carte</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container page-hero-content">
+    <p class="page-hero-eyebrow">Tous les départs</p>
+    <h1 class="page-hero-title">Carte des <em>circuits</em></h1>
+    <p class="page-hero-sub">Points de départ de tous les circuits bivouac et randos journée.<br>Cliquez sur un marqueur pour voir les détails.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="carte-container" id="map"></div>
+
+    <div class="map-legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#52b788"></span>Facile</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#e9c46a"></span>Modéré</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#c96a1e"></span>Difficile</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#8B0000"></span>Expert</span>
+      <span class="legend-sep">|</span>
+      <span class="legend-item"><span class="legend-sq" style="background:#4d89c9"></span>Rando journée</span>
+    </div>
+    <p class="map-tip">Les marqueurs groupés se séparent en zoomant sur la carte.</p>
+  </div>
+</section>
+
+<!-- Points de départ par circuit (coordonnées approximatives) -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Liste complète</p>
+      <h2 class="section-title">Points de <em>départ</em></h2>
+    </div>
+    <div class="carte-points" id="cartePoints"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">⛰️ BivouacPB</div>
+        <p class="footer-tagline">Le plus beau bivouac, c'est toujours le premier.</p>
+        <p class="footer-sub">Laissez la montagne intacte pour les prochains.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <div class="footer-col-title">Navigation</div>
+          <a href="index.html">Circuits bivouac</a>
+          <a href="journee.html">Randos journée</a>
+          <a href="guide.html">Guide bivouac</a>
+          <a href="carte.html">Carte</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Ressources</div>
+          <a href="https://www.altituderando.com" target="_blank">Altituderando</a>
+          <a href="https://fr.wikiloc.com" target="_blank">Wikiloc</a>
+          <a href="https://meteofrance.com/meteo-montagne/pyrenees" target="_blank">Météo montagne</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>☎️ Urgences montagne : <strong>112</strong> · PGHM Pau : <strong>05 62 92 41 41</strong></span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data.js"></script>
+<script src="main.js"></script>
+<script>
+initNav();
+
+// Coordonnées des points de départ (lat, lng)
+const CIRCUIT_COORDS = {
+  1:  [42.977, -0.559],  // Bious-Artigues / Gabas
+  2:  [43.247, -1.298],  // Bidarray
+  3:  [43.007, -1.047],  // Plateau d'Iraty
+  4:  [42.954, -0.558],  // Fabrèges (Ossau)
+  5:  [43.163, -1.237],  // Saint-Jean-Pied-de-Port
+  6:  [42.893, -0.163],  // Pont d'Espagne, Cauterets
+  7:  [42.980, -0.562],  // Gabas (légèrement décalé)
+  8:  [42.533, 2.013],   // Les Angles / Bouillouses
+  9:  [42.975, -0.556],  // Gabas (décalé)
+  25: [43.028, -0.823],  // Sainte-Engrâce
+  26: [42.983, -0.553],  // Gabas (décalé)
+  27: [42.739, -0.007],  // Gavarnie
+  28: [42.836,  0.168],  // Lac d'Orédon
+  29: [43.234, -0.882],  // Mauléon-Licharre
+  30: [42.707,  1.637],  // Les Cabannes (Ariège)
+  31: [42.969, -0.263],  // Arrens-Marsous
+  32: [42.557,  2.382],  // Vernet-les-Bains (Canigou)
+  33: [43.367, -1.767],  // Hendaye
+  34: [42.566,  1.024],  // Espot, Catalogne
+  35: [42.743, -0.011],  // Gavarnie (décalé)
+  36: [42.896, -0.166],  // Pont d'Espagne (décalé)
+  37: [43.364, -1.771],  // Hendaye (décalé)
+  38: [42.768,  1.513],  // Auzat (Ariège)
+  39: [42.543,  1.601],  // Andorre
+};
+
+const RANDO_COORDS = {
+  10: [43.315, -1.581],  // Sare (La Rhune)
+  11: [43.309, -1.497],  // Ainhoa (Mondarrain)
+  12: [43.381, -1.298],  // Hasparren (Ursuya)
+  13: [43.441, -1.562],  // Bidart (Corniche)
+  14: [43.066, -0.944],  // Larrau (Pic d'Orhy)
+  15: [43.368, -1.696],  // Urrugune (Tres Coronas)
+  16: [42.906,  0.132],  // La Mongie (Pic du Midi)
+  17: [42.979, -0.557],  // Bious-Artigues (tour lac)
+  18: [42.893, -0.163],  // Pont d'Espagne (Lac de Gaube)
+  19: [43.119, -1.345],  // Urepel (Aldudes)
+  20: [42.974, -0.554],  // Gabas (Midi d'Ossau voie normale)
+  21: [43.031, -0.820],  // Sainte-Engrâce (Kakuetta journée)
+  22: [42.917, -0.691],  // Lescun (Table des 3 rois)
+  23: [42.741, -0.009],  // Gavarnie (Brèche de Roland)
+  24: [42.533,  2.015],  // Bouillouses (Carlit journée)
+};
+
+// Couleur par niveau
+function levelColor(level) {
+  return level === 'facile' ? '#52b788' :
+         level === 'modere' ? '#e9c46a' :
+         level === 'difficile' ? '#c96a1e' : '#8B0000';
+}
+
+// Init carte Leaflet
+const map = L.map('map', { zoomControl: true }).setView([42.95, 0.2], 8);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 17
+}).addTo(map);
+
+// Marqueurs circuits bivouac (cercles)
+CIRCUITS.forEach(c => {
+  const coords = CIRCUIT_COORDS[c.id];
+  if (!coords) return;
+  L.circleMarker(coords, {
+    radius: 9,
+    fillColor: levelColor(c.level),
+    color: 'white',
+    weight: 2,
+    fillOpacity: 0.92
+  }).addTo(map).bindPopup(`
+    <div class="map-popup-title">${c.emoji} ${c.title}</div>
+    <div class="map-popup-meta">${c.levelLabel} · ${c.jours}j · ${c.totalKm} km · D+ ${c.denivelé.toLocaleString()} m</div>
+    <div class="map-popup-meta" style="margin-top:.3rem">📍 ${c.depart.split('—')[0]}</div>
+    <a class="map-popup-link" href="index.html">Voir ce circuit →</a>
+  `);
+});
+
+// Marqueurs randos journée (carrés via divIcon)
+RANDOS_JOURNEE.forEach(r => {
+  const coords = RANDO_COORDS[r.id];
+  if (!coords) return;
+  const icon = L.divIcon({
+    className: '',
+    html: `<div style="width:14px;height:14px;background:#4d89c9;border:2px solid white;border-radius:3px;box-shadow:0 0 0 1px rgba(0,0,0,.2)"></div>`,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7]
+  });
+  L.marker(coords, { icon }).addTo(map).bindPopup(`
+    <div class="map-popup-title">${r.emoji} ${r.title}</div>
+    <div class="map-popup-meta">Rando journée · ${r.distance} · ${r.duree} · D+ ${r.denivelé}</div>
+    <div class="map-popup-meta" style="margin-top:.3rem">📍 ${r.depart.split('—')[0]}</div>
+    <a class="map-popup-link" href="journee.html">Voir les randos journée →</a>
+  `);
+});
+
+// Liste des points de départ
+const zoneColor = { paysbasque: 'var(--sage)', pyrenees: 'var(--sand)', ariege: '#7c6b5a', orientales: '#c96a1e' };
+const zoneLabel = { paysbasque: 'Pays Basque', pyrenees: 'Pyrénées', ariege: 'Ariège', orientales: 'Orientales' };
+
+document.getElementById('cartePoints').innerHTML = CIRCUITS.map(c => `
+  <div class="carte-point">
+    <div class="cp-dot" style="background:${levelColor(c.level)}"></div>
+    <div class="cp-body">
+      <div class="cp-name">${c.emoji} ${c.title}</div>
+      <div class="cp-info">${c.depart.split('—')[0].trim()} · ${zoneLabel[c.zone] || c.zone}</div>
+    </div>
+  </div>
+`).join('');
+</script>
+</body>
+</html>
